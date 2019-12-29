@@ -1,5 +1,4 @@
-const express = require('express');
-const app = express();
+const knex = require ("knex");
 
 const connection = {
     client : "mysql",
@@ -11,14 +10,5 @@ const connection = {
     }
 };
 
-let knex = require ("knex")(connection);
+module.exports = knex(connection);
 
-app.get('/departments', (req,res) => {
-    knex.select("*").from("department").then((data) => {
-        res.send(data)
-    })
-})
-
-app.listen(7000, () => {
-    console.log('server is running....')
-});
