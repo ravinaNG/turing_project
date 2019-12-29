@@ -1,8 +1,24 @@
 const express = require('express');
 const app = express();
 
-const port = process.env.PORT || 3000;
+const connection = {
+    client : "mysql",
+    connection : {
+        host : "localhost",
+        user : "root",
+        password : "Ravina@123",
+        database : "tshirts"
+    }
+};
 
-app.listen(port, () => {
-    console.log('server is running....');
+let knex = require ("knex")(connection);
+
+app.get('/departments', (req,res) => {
+    knex.select("*").from("department").then((data) => {
+        res.send(data)
+    })
 })
+
+app.listen(7000, () => {
+    console.log('server is running....')
+});
