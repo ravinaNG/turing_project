@@ -20,7 +20,7 @@ app.get('/attributes/:id', (req, res) => {
 })
 
 // using join method 
-app.get('/attributes/values/:attribute_id', (req, res) => {
+app.get('/attributes/values/{attribute_id}', (req, res) => {
     const id = req.params.attribute_id;
     knex('attribute_value')
     .select('attribute_value.attribute_value_id', 'value')
@@ -31,6 +31,19 @@ app.get('/attributes/values/:attribute_id', (req, res) => {
     })
 })
 
-app.listen(4000, () => {
+// joining three tables
+app.get('/attributes/inProduct/{product_id}', (req, res) => {
+    const id = req.params.product_id;
+    knex('attribute_value')
+    .join('product_attribute', 'product_attribute.attribute_value_id', '=', 'attribute_value.attribute_value_id')
+    .join('attribute', 'attribute.attribute_id', '=', 'attribute_value.attribute_id')
+    .select('attribute_value.attribute_value_id', 'value', 'attribute.name')
+    .where('product_attribute.product_id', id)
+    .then((data) => {
+        res.send(data);
+    })
+})
+
+app.listen(8000, () => {
     console.log('Now I am ready go ahead....');
 });
