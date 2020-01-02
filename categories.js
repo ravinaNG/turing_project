@@ -33,6 +33,17 @@ app.get('/categories/inProduct/:id', (req, res) => {
     })
 })
 
+// fifth task
+app.get('/categories/inDepartment/:id', (req, res) => {
+    const id = req.params.id;
+    knex('category')
+    .where('category.department_id', id)
+    .select('category.category_id', 'department_id', 'name', 'description')
+    .then((data) => {
+        res.send(data)
+    })
+})
+
 app.listen(7000, () => {
     console.log('Server is active....')
 })
