@@ -21,6 +21,7 @@ app.get('/category/:id', (req,res) => {
     })
 })
 
+// fourth task using join method
 app.get('/categories/inProduct/:id', (req, res) => {
     const id = req.params.id;
     knex('category')
