@@ -25,7 +25,7 @@ app.get('/category/:id', (req,res) => {
 app.get('/categories/inProduct/:id', (req, res) => {
     const id = req.params.id;
     knex('category')
-    .select('category.category_id', 'department_id', 'name')
+    .select('*')
     .join('product_category', 'category.category_id', '=', 'product_category.category_id')
     .where('product_category.product_id', id)
     .then((data) => {
