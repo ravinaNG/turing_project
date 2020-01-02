@@ -20,7 +20,7 @@ app.get('/attributes/:id', (req, res) => {
 })
 
 // using join method 
-app.get('/attributes/values/{attribute_id}', (req, res) => {
+app.get('/attributes/values/:attribute_id', (req, res) => {
     const id = req.params.attribute_id;
     knex('attribute_value')
     .select('attribute_value.attribute_value_id', 'value')
