@@ -11,6 +11,4 @@ var selectby_id  = (id)=>{
 }
 
 
-module.exports = {selectData, selectby_id 
-
-}
+module.exports = {selectData, selectby_id}

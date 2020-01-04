@@ -12,3 +12,5 @@ router.get('/product', (req, res) => {
         res.send(err);
     })
 })
+
+module.exports = router;

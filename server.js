@@ -5,7 +5,7 @@ const deparments = require("./routes/department")
 app.use("/deparments",deparments)
 
 const product = require('./routes/product')
-app.use('/products',product)
+app.use('/products', product)
 
 
 app.listen(7000, () => {
