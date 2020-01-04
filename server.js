@@ -1,8 +1,12 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
-var deparments = require("./routes/department")
+const deparments = require("./routes/department")
 app.use("/deparments",deparments)
+
+const product = require('./routes/product')
+app.use('/products',product)
+
 
 app.listen(7000, () => {
     console.log('server is running....')

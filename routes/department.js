@@ -1,5 +1,4 @@
 const express = require('express');
-const app = express();
 const departments = express.Router();
 const departmentDb  = require("../models/departmentDb")
 
