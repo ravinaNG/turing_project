@@ -13,9 +13,10 @@ router.get('/product', (req, res) => {
     })
 })
 
-router.get('/searching/:name', (req, res) => {
+router.get('/searching/:limitNum/:name', (req, res) => {
     const name = req.params.name;
-    const data = productDB.searchObject(name);
+    const limitNum = req.params.limitNum;
+    const data = productDB.searchObject(limitNum, name);
     data.then((response) => {
         res.json(response);
     })

@@ -4,8 +4,11 @@ const listOfObjects = () => {
     return knex.select('*').from('product');
 };
 
-const searchObject = (name) => {
-    return knex.select('*').from('product').where('product.name', 'like', '%' +name+ '%')
+const searchObject = (limitNum, name) => {
+    return knex.select('*')
+    .from('product')
+    .limit(limitNum)
+    .where('product.name', 'like', '%' +name+ '%')
 }
 
 module.exports = {listOfObjects, searchObject};
