@@ -5,7 +5,7 @@ const listOfObjects = () => {
 };
 
 const searchObject = (name) => {
-    knex.select('*').from('product').where('product.name', 'like', '%' +name+ '%')
+    return knex.select('*').from('product').where('product.name', 'like', '%' +name+ '%')
 }
 
-module.exports = {listOfObjects};
+module.exports = {listOfObjects, searchObject};
