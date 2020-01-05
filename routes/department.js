@@ -28,6 +28,3 @@ departments.get('/departments/:id', (req,res) => {
 
 module.exports = departments
 
-// app.listen(7000, () => {
-//     console.log('server is running....')
-// });

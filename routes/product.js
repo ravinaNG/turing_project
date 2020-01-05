@@ -13,4 +13,16 @@ router.get('/product', (req, res) => {
     })
 })
 
+router.get('/searching/:name', (req, res) => {
+    const name = req.params.name;
+    const data = productDB.searchObject(name);
+    data.then((response) => {
+        res.json(response);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.send(err)
+    })
+})
+
 module.exports = router;
