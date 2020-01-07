@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const productDB = require('../models/productDB');
 
+
 router.get('/product', (req, res) => {
     const data = productDB.listOfObjects();
     data.then((response) => {
@@ -107,5 +108,26 @@ router.get('/product/:id/location', (req, res) => {
         res.send(err);
     })
 })
+
+
+router.post('/productPost/:id',(req,res)=>{
+    review = {
+        "customer_id": req.body.customer_id,
+        "review":req.body.review,
+        "rating":req.body.rating,
+        "created_on":req.body.created_on,
+        'product_id': req.params.id 
+    }
+    var data = productDB.inserting(review);
+    data.then((response)=>{
+        res.json('data sent Bhai....');
+    })
+    .catch((err) => {
+        console.log(err);
+        res.send(err);
+    })
+    
+})
+
 
 module.exports = router;

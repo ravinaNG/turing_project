@@ -45,4 +45,8 @@ const depatmCateg = (id) => {
     .where('product.product_id', id)
 }
 
-module.exports = {listOfObjects, searchObject, byProductId, byCategoryId, byDepartmentId, details, depatmCateg};
+const inserting = (review) => {
+    return knex('review').insert(review)
+}
+
+module.exports = {listOfObjects, searchObject, byProductId, byCategoryId, byDepartmentId, details, depatmCateg,  inserting};
