@@ -85,4 +85,27 @@ router.get('/inDepartment/:id', (req, res) =>{
     })
 })
 
+router.get('/product/:id/details', (req, res) => {
+    const product_id = req.params.id;
+    const data = productDB.details(product_id);
+    data.then((response) =>{
+        res.json(response);
+    })
+    .catch((err) => {
+        res.send(err);
+    })
+})
+
+router.get('/product/:id/location', (req, res) => {
+    const product_id = req.params.id;
+    const data = productDB.depatmCateg(product_id);
+    data.then((response) => {
+        res.json(response);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.send(err);
+    })
+})
+
 module.exports = router;
