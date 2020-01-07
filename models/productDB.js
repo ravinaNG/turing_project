@@ -8,7 +8,7 @@ const searchObject = (limitNum, name) => {
     return knex.select('*')
     .from('product')
     .limit(limitNum)
-    .where('product.name', 'like', '%' +name+ '%')
+    .where('product.name', 'like','%', +name+ '%')
 }
 
 module.exports = {listOfObjects, searchObject};
