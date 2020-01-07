@@ -47,4 +47,42 @@ router.get('/product/:id', (req, res) => {
     })
 })
 
+router.get('/inCategory/:id', (req, res) =>{
+    const category_id = req.params.id;
+    const data = productDB.byCategoryId(category_id);
+    data.then((response) =>{
+        const mainData = {
+            'product_id': response[0]['product_id'],
+            'name': response[0]['name'],
+            'description': response[0]['description'],
+            'price': response[0]['price'],
+            'discounted_price': response[0]['discounted_price'],
+            'thumbnail': response[0]['thumbnail']
+        };
+        res.json(mainData);
+    })
+    .catch((err) =>{
+        res.send(err);
+    })
+})
+
+router.get('/inDepartment/:id', (req, res) =>{
+    const department_id = req.params.id;
+    const data = productDB.byDepartmentId(department_id);
+    data.then((response) =>{
+        const mainData = {
+            'product_id': response[0]['product_id'],
+            'name': response[0]['name'],
+            'description': response[0]['description'],
+            'price': response[0]['price'],
+            'discounted_price': response[0]['discounted_price'],
+            'thumbnail': response[0]['thumbnail']
+        }
+        res.json(mainData);
+    })
+    .catch((err) => {
+        res.send(err)
+    })
+})
+
 module.exports = router;

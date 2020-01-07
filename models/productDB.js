@@ -17,4 +17,18 @@ const byProductId = (id) =>{
     .where('product.product_id', id)
 }
 
-module.exports = {listOfObjects, searchObject, byProductId};
+const byCategoryId = (id) => {
+    return knex.select('*')
+    .from('product')
+    .join('product_category', 'product_category.product_id', '=', 'product.product_id')
+    .where('product_category.product_id', id)
+}
+
+const byDepartmentId = (id) =>{
+    return knex.select('*')
+    .from('product')
+    .join('department', 'department.department_id', '=', 'product.product_id')
+    .where('department.department_id', id)
+}
+
+module.exports = {listOfObjects, searchObject, byProductId, byCategoryId, byDepartmentId};
