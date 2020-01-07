@@ -49,4 +49,11 @@ const inserting = (review) => {
     return knex('review').insert(review)
 }
 
-module.exports = {listOfObjects, searchObject, byProductId, byCategoryId, byDepartmentId, details, depatmCateg,  inserting};
+const reviewById = (id) => {
+    return knex.select('name', 'review', 'rating', 'created_on')
+    .from('review')
+    .join('product', 'product.product_id', '=', 'review.product_id')
+    .where('product.product_id', id)
+}
+
+module.exports = {listOfObjects, searchObject, byProductId, byCategoryId, byDepartmentId, details, depatmCateg,  inserting, reviewById};

@@ -129,5 +129,15 @@ router.post('/productPost/:id',(req,res)=>{
     
 })
 
+router.get('/product/:id/review', (req, res) =>{
+    const product_id = req.params.id;
+    const data = productDB.reviewById(product_id);
+    data.then((response) => {
+        res.json(response);
+    })
+    .catch((err) => {
+        res.send(err);
+    })
+})
 
 module.exports = router;
