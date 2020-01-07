@@ -37,4 +37,14 @@ router.get('/searching/:limitNum/:name/:length', (req, res) => {
     })
 })
 
+router.get('/product/:id', (req, res) => {
+    const product_id = req.params.id;
+    const data = productDB.byProductId(product_id);
+    data.then((response) => {
+        res.json(response);
+    }).catch((err) => {
+        res.send(err);
+    })
+})
+
 module.exports = router;

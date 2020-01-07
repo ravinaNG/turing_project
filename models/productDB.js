@@ -11,4 +11,10 @@ const searchObject = (limitNum, name) => {
     .where('product.name', 'like','%', +name+ '%')
 }
 
-module.exports = {listOfObjects, searchObject};
+const byProductId = (id) =>{
+    return knex.select("*")
+    .from('product')
+    .where('product.product_id', id)
+}
+
+module.exports = {listOfObjects, searchObject, byProductId};
