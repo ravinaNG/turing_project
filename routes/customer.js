@@ -22,4 +22,32 @@ router.post('/customer', (req, res) => {
     });
 })
 
+router.put('/update/:id', (req, res) => {
+    const customer_id = req.params.id;
+    data = {
+        customer_id: req.body.customer_id,
+        name: req.body.name,
+        email: req.body.email,
+        address_1: req.body.address_1,
+        address_2: req.body.address_2,
+        city: req.body.city,
+        region: req.body.region,
+        postal_code: req.body.postal_code,
+        country: req.body.country,
+        shipping_region_id: req.body.shipping_region_id,
+        day_phone: req.body.day_phone,
+        eve_phone: req.body.eve_phone,
+        mob_phone: req.body.mob_phone,
+        credit_card: req.body.credit_card
+    };
+    const updateData = customerDB.customerPut(customer_id, data);
+    updateData.then((response) => {
+        res.json('data has updated.')
+    })
+    .catch((err) => {
+        console.log(err);
+        res.send(err);
+    });
+})
+
 module.exports = router;
