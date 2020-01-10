@@ -10,4 +10,9 @@ const customerPut = (id, data) => {
     .where('customer.customer_id', id)
 }
 
-module.exports = {customerPost, customerPut};
+const customerLogin = () => {
+    return knex.select('customer.name', 'customer.email', 'customer.password')
+    .from('customer')
+}
+
+module.exports = {customerPost, customerPut, customerLogin};

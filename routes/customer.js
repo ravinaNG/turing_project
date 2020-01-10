@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const customerDB = require('../models/customerDB');
+const jwt = require('jsonwebtoken');
 
 router.post('/customer', (req, res) => {
     data = {
@@ -49,5 +50,23 @@ router.put('/update/:id', (req, res) => {
         res.send(err);
     });
 })
+
+router.post('/login', (req, res) => {
+    let user_email = req.body.email
+    let user_password =  req.body.password
+    const updateData = customerDB.customerLogin();
+    updateData.then((response) => {
+       for(index in response){
+           if(response[index]["email"]==user_email && response[index]['password'] == user_password){
+                const token = jwt.sign({"user": response}, 'Ravina')
+                res.cookie(token)
+                res.json('Done bhai....')
+           }
+       } 
+        
+    })
+    
+     
+})  
 
 module.exports = router;
