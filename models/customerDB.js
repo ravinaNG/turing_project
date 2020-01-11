@@ -27,4 +27,10 @@ const customerPutByJwt = (id, data) => {
     .where('customer.customer_id', id)
 }
 
-module.exports = {customerPost, customerPut, customerLogin, customerAddress, customerPutByJwt};
+const craditCard = (id, data) => {
+    return knex('customer')
+    .update(data)
+    .where('customer.customer_id', id)
+}
+
+module.exports = {customerPost, customerPut, customerLogin, customerAddress, customerPutByJwt, craditCard};

@@ -52,6 +52,5 @@ router.get('/attribute/inProduct/:product_id', (req, res) => {
         res.send(err);
     })
 })
-console.log('jhfhfjf');
 
 module.exports = router;
