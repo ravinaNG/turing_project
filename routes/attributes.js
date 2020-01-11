@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
+router.use(express.json());
 const attributeDB = require('../models/attributeDB')
 
 router.get('/attribute', (req, res) => {
     const data = attributeDB.selectObjects();
     data.then((response) => {
-        res.json(response);
+        res.json(typeof(response));
     })
     .catch((err) =>{
         console.log(err);
@@ -51,5 +52,6 @@ router.get('/attribute/inProduct/:product_id', (req, res) => {
         res.send(err);
     })
 })
+console.log('jhfhfjf');
 
 module.exports = router;

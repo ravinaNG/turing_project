@@ -11,8 +11,20 @@ const customerPut = (id, data) => {
 }
 
 const customerLogin = () => {
-    return knex.select('customer.name', 'customer.email', 'customer.password')
+    return knex.select('customer.email', 'customer.password')
     .from('customer')
 }
 
-module.exports = {customerPost, customerPut, customerLogin};
+const customerAddress = (id, data) => {
+    return knex('customer')
+    .update(data)
+    .where('customer.customer_id', id)
+}
+
+const customerPutByJwt = (id, data) => {
+    return knex('customer')
+    .update(data)
+    .where('customer.customer_id', id)
+}
+
+module.exports = {customerPost, customerPut, customerLogin, customerAddress, customerPutByJwt};
