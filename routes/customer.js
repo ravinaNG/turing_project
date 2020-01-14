@@ -61,6 +61,7 @@ router.post('/login', (req, res) => {
            if(response[index]['email']==user_email && response[index]['password'] == user_password){
                 const token = jwt.sign({"user": response}, 'Ravina')
                 res.cookie(token)
+                console.log(token)
                 res.send('Done bhai....')
            }
        }
@@ -74,22 +75,25 @@ router.post('/login', (req, res) => {
 
 router.put('/address', (req, res) => {
     const allTokens = req.headers.cookie;
+    // console.log(allTokens)
     const tokenList = allTokens.split('=undefined; ');
     const lastToken = tokenList[tokenList.length-3]
+    console.log(lastToken)
     jwt.verify(lastToken, 'Ravina', ()=>{
-        const customer_id = req.body.customer_id;
+        let customer_id=req.body.customer_id;
         const dataForUpdating = {
-            "address_1":req.body.address_1,
-            "address_2":req.body.address_2,
-            "city":req.body.city,
-            "region":req.body.region,
-            "postal_code":req.body.postal_code,
-            "country":req.body.country,
-            "shipping_region_id":req.body.shipping_region_id
+            customer_id:customer_id,
+            address_1:req.body.address_1,
+            address_2:req.body.address_2,
+            city:req.body.city,
+            region:req.body.region,
+            postal_code:req.body.postal_code,
+            country:req.body.country,
+            shipping_region_id:req.body.shipping_region_id
         }
         const date = customerDB.customerAddress(customer_id, dataForUpdating);
         date.then((response) => {
-            res.send(response);
+            res.json(response);
         })
         .catch((err) => {
             res.send(err)
@@ -97,7 +101,7 @@ router.put('/address', (req, res) => {
     })
 })
 
-router.put('/customer_jwt', (req, res) => {
+router.put('/customer', (req, res) => {
     const allTokens = req.headers.cookie;
     const tokenList = allTokens.split('=undefined; ');
     const lastToken = tokenList[tokenList.length - 1];
@@ -113,7 +117,8 @@ router.put('/customer_jwt', (req, res) => {
         }
         const data = customerDB.customerPutByJwt(customer_id, updating);
         data.then((updatedData) => {
-            res.json(updatedData);
+            console.log(updatedData)
+            res.json(updating);
         })
         .catch((err) => {
             console.log(err);
@@ -131,15 +136,33 @@ router.put('/CreditCard', (req, res) => {
         const updating = {
             "credit_card": req.body.credit_card
         }
-        const data = customerDB.credit_card(customer_id, updating);
+        const data = customerDB.craditCard(customer_id, updating);
         data.then((updatedData) => {
-            res.json(updatedData);
+            res.json(updating);
         })
         .catch((err) => {
             console.log(err);
             res.send(err);
         })
     })
+})
+
+router.get('/customer', (req, res) => {
+    const allTokens = req.headers.cookie;
+    const tokenList = allTokens.split('=undefined; ');
+    const lastToken = tokenList[tokenList.length - 1];
+    jwt.verify(lastToken, 'Ravina', () => {
+        const customer_id = req.body.customer_id;
+        const data = customerDB.customerGet(customer_id);
+        data.then((response) => {
+            res.json(response);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send(err);
+        })
+    })
+        
 })
 
 module.exports = router;

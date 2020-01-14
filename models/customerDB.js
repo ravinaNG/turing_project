@@ -33,4 +33,10 @@ const craditCard = (id, data) => {
     .where('customer.customer_id', id)
 }
 
-module.exports = {customerPost, customerPut, customerLogin, customerAddress, customerPutByJwt, craditCard};
+const customerGet = (id) => {
+    return knex.select('*')
+    .from('customer')
+    .where('customer.customer_id', id)
+}
+
+module.exports = {customerPost, customerPut, customerLogin, customerAddress, customerPutByJwt, craditCard, customerGet};

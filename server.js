@@ -17,6 +17,9 @@ app.use('/products', product);
 const customer = require('./routes/customer');
 app.use('/customers', customer);
 
-app.listen(7000, () => {
+const shoppingCart = require('./routes/shoppingCart');
+app.use('/shoppingCart', shoppingCart)
+
+app.listen(6000, () => {
     console.log('server is running....')
 });
