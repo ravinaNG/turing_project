@@ -20,6 +20,9 @@ app.use('/customers', customer);
 const shoppingCart = require('./routes/shoppingCart');
 app.use('/shoppingCart', shoppingCart)
 
+const tax = require('./routes/tax');
+app.use('', tax);
+
 app.listen(6000, () => {
     console.log('server is running....')
 });
