@@ -40,7 +40,7 @@ router.get('/:cart_id', (req, res) => {
     data.then((response) => {
         const price = response[0]['price'];
         const quantity = response[0]['quantity'];
-        response['sabtotal'] = price * quantity;
+        response[0]['sabtotal'] = price * quantity;
         console.log(response);
         res.json(response);
     }).catch((err) => {
@@ -81,10 +81,11 @@ router.get('/saveForLater/:item_id', (req, res) => {
     const item_id = req.params.item_id;
     const data = shoppingCartDB.shopping_cart2(item_id);
     const insertingData = shoppingCartDB.saveForLater(data);
-    const deleteData = shoppingCartDB.delShoppingCartData(item_id);
     insertingData.then((response) => {
-        console.log(response);
-        res.json(deleteData);
+        const deleteData = shoppingCartDB.delShoppingCartData(item_id);
+        deleteData.then((resp) => {
+            res.json(resp);
+        })
     })
     .catch((err) => {
         console.log(err);
@@ -92,4 +93,51 @@ router.get('/saveForLater/:item_id', (req, res) => {
     })
 })
 
+router.get('/getSaved/:cart_id', (req, res) => {
+    const cart_id = req.params.cart_id;
+    const data = shoppingCartDB.getSaved(cart_id);
+    data.then((resp) => {
+        res.json(resp);
+    })
+    .catch((err) => {
+        res.send(err);
+    })
+})
+
+
+router.put('/update/:item_id', (req, res) => {
+    const id = req.params.item_id;
+    const myData = shoppingCartDB.update(id);
+    myData.then((data) => {
+        const subtotal = data[0]['price'] * data[0]['quantity'];
+        data[0]['subtotal'] = subtotal;
+        console.log(data);
+        res.json(data);
+    })
+    .catch((err) => {
+        res.send(err);
+    })
+})
+
+router.delete('/removeProduct/:item_id', (req, res) => {
+    const item_id = req.params.item_id;
+    const removedData = shoppingCartDB.removeProduct(item_id);
+    removedData.then((resp) => {
+        res.json(resp);
+    })
+    .catch((err) => {
+        res.send(err);
+    })
+})
+
+router.delete('/empty/:cart_id', (req, res) => {
+    const cart_id = req.params.cart_id;
+    const emptyData = shoppingCartDB.empty(cart_id);
+    emptyData.then((resp) => {
+        res.json(resp);
+    })
+    .catch((err) => {
+        res.send(err);
+    })
+})
 module.exports = router;

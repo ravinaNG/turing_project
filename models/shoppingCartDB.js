@@ -5,12 +5,6 @@ const generateUniqueId = () => {
     .from('shipping_region')
 }
 
-// const add = (id) => {
-//     return knex('product')
-//     .select('product.product_id', 'image', 'name', 'price')
-//     .where('product.product_id', id)
-// }
-
 const shoppingCartPost = (data) => {
     return knex('shopping_cart').insert(data);
 }
@@ -52,9 +46,37 @@ const saveForLater = (data) => {
 }
 
 const delShoppingCartData = (id) => {
-    return knex('saveForLater')
-    .where('saveForLater.item_id', id)
+    return knex('shopping_cart2')
+    .where('shopping_cart2.item_id', id)
     .del()
 }
 
-module.exports = {generateUniqueId, shoppingCartPost, cart_id, data, moveToCart, deleteData, totalAmount, shopping_cart2, saveForLater, delShoppingCartData}
+const getSaved = (cart_id) => {
+    return knex('shopping_cart')
+    .join('product', 'product.product_id', '=', 'shopping_cart.product_id')
+    .select('product.price', 'product.name', 'shopping_cart.item_id', 'shopping_cart.attributes')
+    .where('shopping_cart.cart_id', cart_id)
+}
+
+const update = (item_id) => {
+    return knex('shopping_cart')
+    .join('product', 'product.product_id', '=', 'shopping_cart.product_id')
+    .select('shopping_cart.item_id', 'product.name', 'shopping_cart.attributes', 'shopping_cart.product_id', 'product.price', 'shopping_cart.quantity')
+    .where('shopping_cart.item_id', item_id)
+}
+
+const removeProduct = (id) => {
+    return knex('shopping_cart')
+    .where('shopping_cart.item_id', id)
+    .del()
+}
+
+const empty = (id) => {
+    return knex('shopping_cart')
+    .where('shopping_cart.cart_id', id)
+    .del()
+}
+
+module.exports = {generateUniqueId, shoppingCartPost, cart_id, data, moveToCart,
+    deleteData, totalAmount, shopping_cart2, saveForLater, delShoppingCartData, 
+    getSaved, update, removeProduct, empty}
