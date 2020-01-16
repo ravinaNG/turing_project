@@ -26,6 +26,9 @@ app.use('', tax);
 const shipping = require('./routes/shipping');
 app.use('/shipping', shipping);
 
+const orders = require('./routes/orders');
+app.use('/orders', orders);
+
 app.listen(6000, () => {
     console.log('server is running....')
 });
