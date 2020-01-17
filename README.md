@@ -11,7 +11,7 @@ I have clone the project from (https://github.com/zandoan/turing-backend) and th
 ### MVC Pattern
 ##### It is in MVC (Model View Controler) design.
 - #### Model Folder (connection with mysql and colections of data from mysql)
-- #### Routs Folder (queries are ther)
+- #### Routs Folder (queries are there)
 
 ### used
 - #### Knex
