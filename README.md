@@ -1,6 +1,6 @@
 # Turing Project
 
-I have clone the project from (https://github.com/zandoan/turing-backend) and then converted the sql database in mysql
+I have clone the project from (https://github.com/zandoan/turing-backend) and then converted the sql database in mysql for doing crud operations.
 
 ### Crud Operations 
 - #### Get
